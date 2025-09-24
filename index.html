@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+
+    <link rel="stylesheet" href="styles.css" />
+    <title>Weather App</title>
+  </head>
+
+  <body>
+    <div class="app-card">
+      <form id="search-form">
+        <label for="city"></label>
+        <input
+          type="text"
+          id="city"
+          name="city"
+          placeholder="Enter a city"
+          required
+        />
+        <button type="submit">Search</button>
+      </form>
+
+      <main>
+        <div class="current-weather">
+          <h1 id="city-name">East London, RSA</h1>
+          <p id="date-time"></p>
+          <div class="weather-row">
+            <p id="forecast">
+              Hot with moderate humidity<br />
+              Humidity: <strong>90%</strong>, Wind: <strong>3.5km/h</strong>
+            </p>
+            <div class="current-temperature">
+              <span class="current-temperature-icon">☀️</span>
+              <span class="current-temperature-value">28</span>
+              <span class="current-temperature-unit">°C</span>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer>
+        <p>
+          This project was coded by
+          <a href="#" target="_blank">Carey-Ann Meinie</a> and is
+          <a href="#" target="_blank"> on GitHub</a> and
+          <a href="#" target="_blank">hosted on Netlify</a>
+        </p>
+      </footer>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
