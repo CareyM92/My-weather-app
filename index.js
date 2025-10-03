@@ -1,5 +1,26 @@
-function formatDateTime() {
-  let now = new Date();
+function refreshWeather(response) {
+  let temperatureElement = document.querySelector("#temperature");
+  let temperature = response.data.temperature.current;
+  let cityElement = document.querySelector("#city");
+  let descriptionElement = document.querySelector("#description");
+  let humidityElement = document.querySelector("#humidity");
+  let windSpeedElement = document.querySelector("#wind-speed");
+  let timeElement = document.querySelector("#time");
+  let date = new Date(response.data.time * 1000);
+  let iconElement = document.querySelector("#icon");
+
+  cityElement.innerHTML = response.data.city;
+  timeElement.innerHTML = formatDate(date);
+  descriptionElement.innerHTML = response.data.condition.description;
+  humidityElement.innerHTML = `${response.data.temperature.humidity}%`;
+  windSpeedElement.innerHTML = `${response.data.wind.speed}km/h`;
+  temperatureElement.innerHTML = Math.round(temperature);
+  iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" class="weather-app-icon" />`;
+}
+
+function formatDate(date) {
+  let minutes = date.getMinutes();
+  let hours = date.getHours();
   let days = [
     "Sunday",
     "Monday",
@@ -9,47 +30,28 @@ function formatDateTime() {
     "Friday",
     "Saturday",
   ];
+  let day = days[date.getDay()];
 
-  let day = days[now.getDay()];
-  let hours = now.getHours();
-  let minutes = now.getMinutes();
-
-  if (minutes < 10) minutes = "0" + minutes;
-  if (hours < 10) hours = "0" + hours;
-
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
   return `${day} ${hours}:${minutes}`;
 }
 
-function displayWeather(response) {
-  let cityName = response.data.city;
-  let temperature = Math.round(response.data.temperature.current);
-
-  let cityNameElement = document.querySelector("#city-name");
-  cityNameElement.innerHTML = cityName;
-
-  let temperatureValueElement = document.querySelector(
-    ".current-temperature-value"
-  );
-  temperatureValueElement.innerHTML = temperature;
-
-  let dateTimeElement = document.querySelector("#date-time");
-  dateTimeElement.innerHTML = formatDateTime();
+function searchCity(city) {
+  let apiKey = "ae0t61305d43e04b2da380f8d5bo6cef";
+  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(refreshWeather);
 }
 
-function searchCity(event) {
+function handleSearch(event) {
   event.preventDefault();
 
-  let cityInput = document.querySelector("#city").value.trim();
-  if (cityInput === "") return;
-
-  let apiKey = "ae0t61305d43e04b2da380f8d5bo6cef";
-  let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${cityInput}&key=${apiKey}&units=metric`;
-
-  axios.get(apiUrl).then(displayWeather);
+  let cityInput = document.querySelector("#search-form-input");
+  searchCity(cityInput.value);
 }
 
-let dateTimeElement = document.querySelector("#date-time");
-dateTimeElement.innerHTML = formatDateTime();
-
 let searchForm = document.querySelector("#search-form");
-searchForm.addEventListener("submit", searchCity);
+searchForm.addEventListener("submit", handleSearch);
+
+searchCity("East London");

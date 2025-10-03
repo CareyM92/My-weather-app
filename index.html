@@ -9,40 +9,41 @@
       href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
       rel="stylesheet"
     />
-    <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
 
     <link rel="stylesheet" href="styles.css" />
     <title>Weather App</title>
   </head>
-
   <body>
-    <div class="app-card">
-      <form id="search-form">
-        <label for="city"></label>
-        <input
-          type="text"
-          id="city"
-          name="city"
-          placeholder="Enter a city"
-          required
-        />
-        <button type="submit">Search</button>
-      </form>
-
+    <div class="weather-app">
+      <header>
+        <form class="search-form" id="search-form">
+          <input
+            type="search"
+            placeholder="Enter a city"
+            required
+            id="search-form-input"
+            class="search-form-input"
+          />
+          <input type="submit" value="Search" class="search-form-button" />
+        </form>
+      </header>
       <main>
-        <div class="current-weather">
-          <h1 id="city-name">East London, RSA</h1>
-          <p id="date-time"></p>
-          <div class="weather-row">
-            <p id="forecast">
-              Hot with moderate humidity<br />
-              Humidity: <strong>90%</strong>, Wind: <strong>3.5km/h</strong>
+        <div class="weather-app-data">
+          <div>
+            <h1 class="weather-app-city" id="city"></h1>
+            <p class="weather-app-details">
+              <span id="time"></span>,
+              <span id="description"></span>
+              <br />
+              Humidity: <strong id="humidity"></strong>, Wind:
+              <strong id="wind-speed"></strong>
             </p>
-            <div class="current-temperature">
-              <span class="current-temperature-icon">☀️</span>
-              <span class="current-temperature-value">28</span>
-              <span class="current-temperature-unit">°C</span>
-            </div>
+          </div>
+          <div class="weather-app-temperature-container">
+            <div id="icon"></div>
+            <div class="weather-app-temperature" id="temperature"></div>
+            <div class="weather-app-unit">°C</div>
           </div>
         </div>
       </main>
@@ -50,17 +51,22 @@
       <footer>
         <p>
           This project was coded by
-          <a href="https://github.com/CareyM92" target="_blank"
+          <a href="https://github.com/CareyM92" target="_blank" rel="noopener"
             >Carey-Ann Meinie</a
           >
           and is open-sourced on
-          <a href="https://github.com/CareyM92/My-weather-app" target="_blank">
-             GitHub</a
+          <a
+            href="https://github.com/CareyM92/My-weather-app"
+            target="_blank"
+            rel="noopener"
+          >
+            GitHub</a
           >
           and
           <a
             href="https://extraordinary-sunflower-b06c65.netlify.app/"
             target="_blank"
+            rel="noopener"
             >hosted on Netlify</a
           >
         </p>
